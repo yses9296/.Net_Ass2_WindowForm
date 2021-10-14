@@ -1,0 +1,110 @@
+using Microsoft.VisualBasic;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Assignment2
+{
+    public partial class Login : Form
+    {
+        public static string userName;
+        StreamReader sr = new StreamReader("login.txt");
+        
+        public Login()
+        {
+            InitializeComponent();
+        }
+        private void Login_Load(object sender, EventArgs e)
+        {
+            Name_textBox.Focus();
+        }
+        public void LoginBtn_Click(object sender, EventArgs e)
+        {
+            if (EmptyCheck())
+            {
+                bool check = checkUser(Name_textBox.Text, PW_textBox.Text);
+
+                if (check == true)
+                {
+                    Login.userName = Name_textBox.Text;
+
+                    sr.Close();
+
+                    this.Hide();
+                    TextEditor main = new TextEditor();
+                    TextEditor.userName = Name_textBox.Text;
+
+                    main.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Login Fail, Please check your name and password", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public bool checkUser <T> (T Uname, T Upassword)
+        {
+            sr.BaseStream.Position = 0;
+            while (!sr.EndOfStream)
+            {
+                string key = sr.ReadLine();
+                bool checkId = key.Contains(Name_textBox.Text);
+
+                if (checkId == true)
+                {
+                    LinkedList<string> userValue = new LinkedList<string>();
+                    string[] splits = key.Split(','); // Convert to List or else...
+
+                    string isUserName = splits[0];
+                    string isUserPassword = splits[1];
+
+                    string name = Convert.ToString(isUserName);
+                    string password = Convert.ToString(isUserPassword);
+
+                    return Uname.Equals(name) && Upassword.Equals(password);
+                }
+            }
+            return false;
+        }
+        
+        private bool EmptyCheck()
+        {
+            if (String.IsNullOrEmpty(Name_textBox.Text))
+            {
+                MessageBox.Show("Please check your name", "Login Error");
+                Name_textBox.Focus();
+                return false;
+            }
+            else if (String.IsNullOrEmpty(PW_textBox.Text))
+            {
+                MessageBox.Show("Please check your password", "Login Error");
+                PW_textBox.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        private void NewBtn_Click(object sender, EventArgs e)
+        {
+            sr.Close();
+            this.Hide();
+            NewUser create = new NewUser();
+            create.Show();
+        }
+        private void ExtiBtn_Click(object sender, EventArgs e)
+        {
+            sr.Close();
+            Application.Exit();
+        }
+
+        
+    }
+}

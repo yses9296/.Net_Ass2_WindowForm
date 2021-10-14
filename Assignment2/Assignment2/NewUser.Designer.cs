@@ -174,6 +174,7 @@ namespace Assignment2
             this.UserTypeInput.Name = "UserTypeInput";
             this.UserTypeInput.Size = new System.Drawing.Size(182, 33);
             this.UserTypeInput.TabIndex = 14;
+            this.UserTypeInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UserTypeInput_SelectedIndexChanged);
             // 
             // SubmitBtn
             // 
@@ -183,6 +184,7 @@ namespace Assignment2
             this.SubmitBtn.TabIndex = 15;
             this.SubmitBtn.Text = "Submit";
             this.SubmitBtn.UseVisualStyleBackColor = true;
+            this.SubmitBtn.Click += new System.EventHandler(this.SubmitBtn_Click);
             // 
             // CancleBtn
             // 
@@ -192,6 +194,7 @@ namespace Assignment2
             this.CancleBtn.TabIndex = 16;
             this.CancleBtn.Text = "Cancel";
             this.CancleBtn.UseVisualStyleBackColor = true;
+            this.CancleBtn.Click += new System.EventHandler(this.CancleBtn_Click);
             // 
             // NewUser
             // 

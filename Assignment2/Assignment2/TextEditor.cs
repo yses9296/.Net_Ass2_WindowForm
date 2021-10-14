@@ -326,7 +326,5 @@ namespace Assignment2
                 //richTextBox.Text = (string)ido.GetData(typeof(string));
             }
         }
-
-        
     }
 }

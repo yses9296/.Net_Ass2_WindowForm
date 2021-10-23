@@ -51,117 +51,127 @@ namespace Assignment2
             // createLabel
             // 
             this.createLabel.AutoSize = true;
-            this.createLabel.Location = new System.Drawing.Point(274, 82);
+            this.createLabel.Font = new System.Drawing.Font("Arial Black", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.createLabel.Location = new System.Drawing.Point(157, 64);
             this.createLabel.Name = "createLabel";
-            this.createLabel.Size = new System.Drawing.Size(150, 25);
+            this.createLabel.Size = new System.Drawing.Size(398, 56);
             this.createLabel.TabIndex = 0;
             this.createLabel.Text = "Create New User";
             // 
             // UserNameLabel
             // 
             this.UserNameLabel.AutoSize = true;
-            this.UserNameLabel.Location = new System.Drawing.Point(93, 196);
+            this.UserNameLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.UserNameLabel.Location = new System.Drawing.Point(139, 188);
             this.UserNameLabel.Name = "UserNameLabel";
-            this.UserNameLabel.Size = new System.Drawing.Size(98, 25);
+            this.UserNameLabel.Size = new System.Drawing.Size(102, 21);
             this.UserNameLabel.TabIndex = 1;
             this.UserNameLabel.Text = "UserName";
             // 
             // PWLabel
             // 
             this.PWLabel.AutoSize = true;
-            this.PWLabel.Location = new System.Drawing.Point(93, 241);
+            this.PWLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.PWLabel.Location = new System.Drawing.Point(139, 236);
             this.PWLabel.Name = "PWLabel";
-            this.PWLabel.Size = new System.Drawing.Size(88, 25);
+            this.PWLabel.Size = new System.Drawing.Size(96, 21);
             this.PWLabel.TabIndex = 2;
             this.PWLabel.Text = "Password";
             // 
             // RePWLabel
             // 
             this.RePWLabel.AutoSize = true;
-            this.RePWLabel.Location = new System.Drawing.Point(93, 285);
+            this.RePWLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.RePWLabel.Location = new System.Drawing.Point(139, 284);
             this.RePWLabel.Name = "RePWLabel";
-            this.RePWLabel.Size = new System.Drawing.Size(164, 25);
+            this.RePWLabel.Size = new System.Drawing.Size(177, 21);
             this.RePWLabel.TabIndex = 3;
             this.RePWLabel.Text = "Re-enter Password";
             // 
             // FirstNameLabel
             // 
             this.FirstNameLabel.AutoSize = true;
-            this.FirstNameLabel.Location = new System.Drawing.Point(93, 337);
+            this.FirstNameLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.FirstNameLabel.Location = new System.Drawing.Point(139, 332);
             this.FirstNameLabel.Name = "FirstNameLabel";
-            this.FirstNameLabel.Size = new System.Drawing.Size(100, 25);
+            this.FirstNameLabel.Size = new System.Drawing.Size(105, 21);
             this.FirstNameLabel.TabIndex = 4;
             this.FirstNameLabel.Text = "First Name";
             // 
             // LastNameLabel
             // 
             this.LastNameLabel.AutoSize = true;
-            this.LastNameLabel.Location = new System.Drawing.Point(93, 380);
+            this.LastNameLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.LastNameLabel.Location = new System.Drawing.Point(139, 380);
             this.LastNameLabel.Name = "LastNameLabel";
-            this.LastNameLabel.Size = new System.Drawing.Size(99, 25);
+            this.LastNameLabel.Size = new System.Drawing.Size(103, 21);
             this.LastNameLabel.TabIndex = 5;
             this.LastNameLabel.Text = "Last Name";
             // 
             // BirthLabel
             // 
             this.BirthLabel.AutoSize = true;
-            this.BirthLabel.Location = new System.Drawing.Point(93, 432);
+            this.BirthLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.BirthLabel.Location = new System.Drawing.Point(139, 428);
             this.BirthLabel.Name = "BirthLabel";
-            this.BirthLabel.Size = new System.Drawing.Size(49, 25);
+            this.BirthLabel.Size = new System.Drawing.Size(52, 21);
             this.BirthLabel.TabIndex = 6;
             this.BirthLabel.Text = "Birth";
             // 
             // UserTypeLabel
             // 
             this.UserTypeLabel.AutoSize = true;
-            this.UserTypeLabel.Location = new System.Drawing.Point(93, 485);
+            this.UserTypeLabel.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.UserTypeLabel.Location = new System.Drawing.Point(139, 476);
             this.UserTypeLabel.Name = "UserTypeLabel";
-            this.UserTypeLabel.Size = new System.Drawing.Size(89, 25);
+            this.UserTypeLabel.Size = new System.Drawing.Size(94, 21);
             this.UserTypeLabel.TabIndex = 7;
             this.UserTypeLabel.Text = "UserType";
             // 
             // NameInput
             // 
-            this.NameInput.Location = new System.Drawing.Point(274, 196);
+            this.NameInput.Location = new System.Drawing.Point(355, 181);
             this.NameInput.Name = "NameInput";
-            this.NameInput.Size = new System.Drawing.Size(150, 31);
+            this.NameInput.Size = new System.Drawing.Size(200, 31);
             this.NameInput.TabIndex = 8;
             // 
             // PWInput
             // 
-            this.PWInput.Location = new System.Drawing.Point(274, 241);
+            this.PWInput.Location = new System.Drawing.Point(355, 226);
             this.PWInput.Name = "PWInput";
-            this.PWInput.Size = new System.Drawing.Size(150, 31);
+            this.PWInput.Size = new System.Drawing.Size(200, 31);
             this.PWInput.TabIndex = 9;
+            this.PWInput.UseSystemPasswordChar = true;
             // 
             // RePWInput
             // 
-            this.RePWInput.Location = new System.Drawing.Point(274, 285);
+            this.RePWInput.Location = new System.Drawing.Point(355, 270);
             this.RePWInput.Name = "RePWInput";
-            this.RePWInput.Size = new System.Drawing.Size(150, 31);
+            this.RePWInput.Size = new System.Drawing.Size(200, 31);
             this.RePWInput.TabIndex = 10;
+            this.RePWInput.UseSystemPasswordChar = true;
             // 
             // FirstNameInput
             // 
-            this.FirstNameInput.Location = new System.Drawing.Point(274, 337);
+            this.FirstNameInput.Location = new System.Drawing.Point(355, 322);
             this.FirstNameInput.Name = "FirstNameInput";
-            this.FirstNameInput.Size = new System.Drawing.Size(150, 31);
+            this.FirstNameInput.Size = new System.Drawing.Size(200, 31);
             this.FirstNameInput.TabIndex = 11;
             // 
             // LastNameInput
             // 
-            this.LastNameInput.Location = new System.Drawing.Point(274, 380);
+            this.LastNameInput.Location = new System.Drawing.Point(355, 365);
             this.LastNameInput.Name = "LastNameInput";
-            this.LastNameInput.Size = new System.Drawing.Size(150, 31);
+            this.LastNameInput.Size = new System.Drawing.Size(200, 31);
             this.LastNameInput.TabIndex = 12;
             // 
             // BirthDateInput
             // 
             this.BirthDateInput.CustomFormat = "dd-MM-yyyy";
             this.BirthDateInput.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.BirthDateInput.Location = new System.Drawing.Point(274, 432);
+            this.BirthDateInput.Location = new System.Drawing.Point(355, 417);
             this.BirthDateInput.Name = "BirthDateInput";
-            this.BirthDateInput.Size = new System.Drawing.Size(238, 31);
+            this.BirthDateInput.Size = new System.Drawing.Size(200, 31);
             this.BirthDateInput.TabIndex = 13;
             // 
             // UserTypeInput
@@ -170,17 +180,18 @@ namespace Assignment2
             this.UserTypeInput.Items.AddRange(new object[] {
             "Edit",
             "View"});
-            this.UserTypeInput.Location = new System.Drawing.Point(274, 485);
+            this.UserTypeInput.Location = new System.Drawing.Point(355, 470);
             this.UserTypeInput.Name = "UserTypeInput";
-            this.UserTypeInput.Size = new System.Drawing.Size(182, 33);
+            this.UserTypeInput.Size = new System.Drawing.Size(150, 33);
             this.UserTypeInput.TabIndex = 14;
             this.UserTypeInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UserTypeInput_SelectedIndexChanged);
             // 
             // SubmitBtn
             // 
-            this.SubmitBtn.Location = new System.Drawing.Point(138, 560);
+            this.SubmitBtn.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.SubmitBtn.Location = new System.Drawing.Point(174, 568);
             this.SubmitBtn.Name = "SubmitBtn";
-            this.SubmitBtn.Size = new System.Drawing.Size(112, 34);
+            this.SubmitBtn.Size = new System.Drawing.Size(130, 40);
             this.SubmitBtn.TabIndex = 15;
             this.SubmitBtn.Text = "Submit";
             this.SubmitBtn.UseVisualStyleBackColor = true;
@@ -188,9 +199,10 @@ namespace Assignment2
             // 
             // CancleBtn
             // 
-            this.CancleBtn.Location = new System.Drawing.Point(378, 560);
+            this.CancleBtn.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CancleBtn.Location = new System.Drawing.Point(425, 568);
             this.CancleBtn.Name = "CancleBtn";
-            this.CancleBtn.Size = new System.Drawing.Size(112, 34);
+            this.CancleBtn.Size = new System.Drawing.Size(130, 40);
             this.CancleBtn.TabIndex = 16;
             this.CancleBtn.Text = "Cancel";
             this.CancleBtn.UseVisualStyleBackColor = true;

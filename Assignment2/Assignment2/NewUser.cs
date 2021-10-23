@@ -40,18 +40,17 @@ namespace Assignment2
                 {
                     if (PWInput.Text == RePWInput.Text)
                     {
-                        string newUser = string.Join(",", values);
-                        using (StreamWriter sw = File.AppendText("login.txt"))
-                        {
-                            sw.WriteLine(newUser);
-                            sw.Close();
-                        }
-
-                        if (MessageBox.Show("Is the Information correct?", "Check User Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        DialogResult answer = MessageBox.Show("Is the Information correct?", "Check User Information", MessageBoxButtons.YesNo);
+                        if (answer == DialogResult.Yes)
                         {
                             MessageBox.Show("Create New User Succeed!", "Success", MessageBoxButtons.OK);
+                            string newUser = string.Join(",", values);
+                            using (StreamWriter sw = File.AppendText("login.txt"))
+                            {
+                                sw.WriteLine(newUser);
+                                sw.Close();
+                            }
                             this.Hide();
-
                             Login login = new Login();
                             login.Show();
                         }

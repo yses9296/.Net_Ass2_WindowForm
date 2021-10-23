@@ -11,11 +11,13 @@ namespace Assignment2
 {
     public partial class TextEditor : Form
     {
+        //get userName and userList form login.cs
         static public string userName;
+        public static List<string> userList;
+
         private string fileName;
         bool modify;
         string currentFile;
-        string currentOpenFile;
 
         //Font setting
         private int fontsize;
@@ -26,11 +28,15 @@ namespace Assignment2
 
         private void TextEditor_Load(object sender, EventArgs e)
         {
+            //modify is to check whether it is already existed file or not.
+            //if modify is 'true' then should create new file (Save as). else, can overwirte it (Save)
             modify = true;
-            CheckType(userName);
+            
             username.Text = "UserName: " + userName;
+            CheckType(userName);
         }
-        //Check userType - View or Edit
+
+        //Check userType - View or Edit (Additional function to identify the userType easily)
         public void CheckType(string user)
         {
             string type = getType(userName);
@@ -54,14 +60,13 @@ namespace Assignment2
         public string getType(string name)
         {
             string Utype = "";
-            StreamReader sr = new StreamReader("login.txt");
-            sr.BaseStream.Position = 0;
-
+            StreamReader sr = new StreamReader("login.txt"); //Load the login.txt and find the userType using userName
+            sr.BaseStream.Position = 0; //Initialize the location and scan the file text.
             while (sr.EndOfStream == false)
             {
-                string key = sr.ReadLine();
+                string key = sr.ReadLine(); //Read one line at a time.
 
-                bool Type = key.Contains(name);
+                bool Type = key.Contains(name); //Verify the line(string key) contains userName
                 if (Type == true)
                 {
                     string[] splits = key.Split(',');
@@ -69,6 +74,8 @@ namespace Assignment2
                     return type;
                 }
             }
+
+            sr.Close();
             return Utype;
         }
 
@@ -94,10 +101,22 @@ namespace Assignment2
 
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //Save all users back to “login.txt”, when a user logs out of the text editor
+            using (StreamWriter sw = new StreamWriter("login2.txt")) 
+            {
+                for(int i = 0; i < userList.Count; i++)
+                {
+                    sw.WriteLine(userList[i]); //Overwrite the userlist.
+                }
+                sw.Close(); // Close the StreamWriter
+            }
+            
+            this.Close(); //Close the TextEditor form
+
             Login restart = new Login();
-            restart.Show();
+            restart.Show(); //Open the Login form
         }
+
         //MenuStrip - Edit
         private void cutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -139,51 +158,106 @@ namespace Assignment2
         //toolStrip1.2 - Font Style Editor
         private void BoldTool_Click(object sender, EventArgs e)
         {
+            //if selectionfont has different sizes and styles for each other then, it will be a null pointer.
             if (richTextBox.SelectionFont == null) return;
-            if (richTextBox.SelectionFont.Bold)
+
+            //Set the font format to overlap. i.e. if the Bold and the Underline are applied together, 2 * 5 corresponds to case 10 and break.
+            int number = 1;
+            number = richTextBox.SelectionFont.Bold ? 1 : 2;
+            number *= richTextBox.SelectionFont.Italic ? 3 : 1;
+            number *= richTextBox.SelectionFont.Underline ? 5 : 1;
+
+            switch (number)
             {
-                int thisSize = (int)richTextBox.SelectionFont.Size;
-                richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, thisSize, FontStyle.Regular);
-            }
-            else
-            {
-                int thisSize = (int)richTextBox.SelectionFont.Size;
-                richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, thisSize, FontStyle.Bold);
+                case 1:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Regular); break;
+                case 2:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold); break;
+                case 3:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Italic); break;
+                case 5:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Underline); break;
+                case 6:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold | FontStyle.Italic); break;
+                case 10:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold | FontStyle.Underline); break;
+                case 15:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Italic | FontStyle.Underline); break;
+                case 30:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline); break;
             }
         }
         private void ItalicTool_Click(object sender, EventArgs e)
         {
-            if (richTextBox.SelectionFont == null) return;
-            if (richTextBox.SelectionFont.Italic)
+            if (richTextBox.SelectionFont == null) return; //Null pointer
+
+            //Duplicate font format, different format with Bold one, preventing the conflicts and confusion.
+            int number = 1;
+            number = richTextBox.SelectionFont.Italic ? 1 : 4;
+            number *= richTextBox.SelectionFont.Underline ? 7 : 1;
+            number *= richTextBox.SelectionFont.Bold ? 8 : 1;
+
+            switch (number)
             {
-                int thisSize = (int)richTextBox.SelectionFont.Size;
-                richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, thisSize, FontStyle.Regular);
-            }
-            else
-            {
-                int thisSize = (int)richTextBox.SelectionFont.Size;
-                richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, thisSize, FontStyle.Italic);
+                case 1:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Regular); break;
+                case 4:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Italic); break;
+                case 7:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Underline); break;
+                case 8:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold); break;
+                case 28:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Underline | FontStyle.Italic); break;
+                case 32:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold | FontStyle.Italic); break;
+                case 56:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold | FontStyle.Underline); break;
+                case 224:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline); break;
             }
         }
         private void UnderLineTool_Click(object sender, EventArgs e)
         {
-            if (richTextBox.SelectionFont == null) return;
-            if (richTextBox.SelectionFont.Underline)
+            if (richTextBox.SelectionFont == null) return; //Null pointer
+
+            //Duplicate font format
+            int number = 1;
+            number = richTextBox.SelectionFont.Underline ? 1 : 9;
+            number *= richTextBox.SelectionFont.Bold ? 11 : 1;
+            number *= richTextBox.SelectionFont.Italic ? 12 : 1;
+
+            switch (number)
             {
-                int thisSize = (int)richTextBox.SelectionFont.Size;
-                richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, thisSize, FontStyle.Regular);
-            }
-            else
-            {
-                int thisSize = (int)richTextBox.SelectionFont.Size;
-                richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, thisSize, FontStyle.Underline);
+                case 1:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Regular); break;
+                case 9:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Underline); break;
+                case 11:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold); break;
+                case 12:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Italic); break;
+                case 99:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold | FontStyle.Underline); break;
+                case 108:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Italic | FontStyle.Underline); break;
+                case 132:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Italic | FontStyle.Bold); break;
+                case 1188:
+                    richTextBox.SelectionFont = new Font(richTextBox.SelectionFont, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline); break;
             }
         }
+
         private void FontSizeTool_Click(object sender, EventArgs e)
         {
-            if (richTextBox.SelectionFont == null) return;
+            if (richTextBox.SelectionFont == null) return; //Null pointer
+
+            //new font size value in combobox convert into int type
+            Font currentFont = richTextBox.SelectionFont;
             fontsize = int.Parse(FontSizeTool.SelectedItem.ToString());
-            richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, fontsize, richTextBox.SelectionFont.Bold ? FontStyle.Bold : FontStyle.Regular);
+
+            //Set new Font size maintaining the Font Style
+            richTextBox.SelectionFont = new Font(richTextBox.SelectionFont.FontFamily, fontsize, currentFont.Style);
         }
         private void AboutTool_Click(object sender, EventArgs e)
         {
@@ -208,6 +282,7 @@ namespace Assignment2
         private void New()
         {
             fileName = "noname.txt";
+            //Before clean the richtextbox, check whethether save the file. 
             FileProcessBeforeClose();
         }
         private void FileProcessBeforeClose()
@@ -219,6 +294,7 @@ namespace Assignment2
                 {
                     if (fileName == "noname.txt")
                     {
+                        //Save richtextbox into RTF file
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.DefaultExt = "*.rtf";
                         saveFileDialog.Filter = "RTF Files|*.rtf";
@@ -228,7 +304,7 @@ namespace Assignment2
                             StreamWriter sw = File.CreateText(saveFileDialog.FileName);
                             sw.WriteLine(richTextBox.Text);
                             sw.Close();
-
+                            //set the modify to 'false' to save it to overwrite. (Save)
                             modify = false;
                             richTextBox.Clear();
                         }
@@ -239,9 +315,20 @@ namespace Assignment2
                         sw.WriteLine(richTextBox.Text);
                         sw.Close();
 
+                        //set the modify to 'true' to save it to overwrite. (Save As) 
                         modify = true;
                     }
                 }
+                else
+                {
+                    richTextBox.Clear();
+                    modify = true;
+                }
+            }
+            else
+            {
+                richTextBox.Clear();
+                modify = true;
             }
         }
         private void Open()
@@ -250,14 +337,13 @@ namespace Assignment2
             openFileDialog.Title = "Open the file";
             openFileDialog.DefaultExt = "*.rtf";
             openFileDialog.Filter = "rtf files (*.rtf)|*.rtf|All files (*.*)|*.*";
-            //openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFileDialog.FileName.Length > 0 && !string.IsNullOrEmpty(openFileDialog.FileName))
             {
                 string openfileposition = openFileDialog.FileName;
                 currentFile = openfileposition;
-                currentOpenFile = openfileposition;
-
-                richTextBox.LoadFile(openFileDialog.FileName, RichTextBoxStreamType.PlainText);
+                //Load file using OpenFileDialog.
+                richTextBox.LoadFile(openFileDialog.FileName, RichTextBoxStreamType.RichText);
 
                 fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                 modify = false;
@@ -271,34 +357,45 @@ namespace Assignment2
             }
             else if (modify == false && currentFile != null)
             {
+                //setting the SaveFileDialog variables (RTF file type)
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
 
                 saveFileDialog.Title = "Save";
                 saveFileDialog.FileName = "*.rtf";
                 saveFileDialog.DefaultExt = "*.rtf";
                 saveFileDialog.Filter = "RTF Files|*.rtf";
+                //SaveFileDialog can overwrite this text to existed file (after Open the file).
                 saveFileDialog.OverwritePrompt = true;
                 saveFileDialog.AddExtension = true;
 
-                richTextBox.SaveFile(currentOpenFile, RichTextBoxStreamType.PlainText);
+                richTextBox.SaveFile(currentFile, RichTextBoxStreamType.RichText);
                 MessageBox.Show("Save in " + fileName, "Save", MessageBoxButtons.OK);
+
+                //set the modify to 'false' to save it to overwrite. (Save)
+                modify = false; 
             }
         }
         private void SaveAs()
         {
+            //setting the SaveFileDialog variables (RTF file type)
             SaveFileDialog saveAsFileDialog = new SaveFileDialog();
+
             saveAsFileDialog.Title = "Save AS";
             saveAsFileDialog.DefaultExt = "*.rtf";
             saveAsFileDialog.Filter = "RTF Files|*.rtf";
             if (saveAsFileDialog.ShowDialog() == DialogResult.OK && saveAsFileDialog.FileName.Length > 0)
             {
-                richTextBox.SaveFile(saveAsFileDialog.FileName, RichTextBoxStreamType.PlainText);
+                //Save RichTextFile into RTF file.
+                richTextBox.SaveFile(saveAsFileDialog.FileName, RichTextBoxStreamType.RichText);
+                //set the modify to 'false' to save it to overwrite. (Save)
+                modify = false; 
             }
         }
         private void about()
         {
             string type = getType(userName);
-            string description = "UserName: " + userName + "\nUserType: " + type + "\nVersion:";
+            string thisVersion = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription;
+            string description = "UserName: " + userName + "\nUserType: " + type + "\nVersion: " + thisVersion;
             MessageBox.Show(description, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -326,5 +423,6 @@ namespace Assignment2
                 //richTextBox.Text = (string)ido.GetData(typeof(string));
             }
         }
+
     }
 }
